@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обратный отсчет до 29 мая 2026</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(circle at top, #1f2a44, #0b1020 65%);
+        color: #f4f7ff;
+      }
+
+      .card {
+        width: min(720px, 92vw);
+        padding: 32px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        text-align: center;
+      }
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: clamp(24px, 4vw, 36px);
+      }
+
+      .subtitle {
+        margin: 0 0 28px;
+        opacity: 0.85;
+      }
+
+      .timer {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .time-box {
+        padding: 16px 10px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .value {
+        font-size: clamp(26px, 4vw, 38px);
+        font-weight: 700;
+        line-height: 1.1;
+      }
+
+      .label {
+        margin-top: 4px;
+        font-size: 13px;
+        opacity: 0.85;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .done {
+        font-size: clamp(22px, 3vw, 30px);
+        font-weight: 700;
+      }
+
+      @media (max-width: 560px) {
+        .timer {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Считаем до 29 мая 2026</h1>
+      <p class="subtitle">Пока стартуем с простого экрана с таймером.</p>
+
+      <section id="timer" class="timer" aria-live="polite">
+        <div class="time-box">
+          <div class="value" id="days">0</div>
+          <div class="label">дней</div>
+        </div>
+        <div class="time-box">
+          <div class="value" id="hours">0</div>
+          <div class="label">часов</div>
+        </div>
+        <div class="time-box">
+          <div class="value" id="minutes">0</div>
+          <div class="label">минут</div>
+        </div>
+        <div class="time-box">
+          <div class="value" id="seconds">0</div>
+          <div class="label">секунд</div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const deadline = new Date("2026-05-29T00:00:00");
+      const timerElement = document.getElementById("timer");
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function updateTimer() {
+        const now = new Date();
+        const diff = deadline.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          timerElement.innerHTML = '<p class="done">Дата наступила 🎉</p>';
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        document.getElementById("days").textContent = String(days);
+        document.getElementById("hours").textContent = pad(hours);
+        document.getElementById("minutes").textContent = pad(minutes);
+        document.getElementById("seconds").textContent = pad(seconds);
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    </script>
+  </body>
+</html>
