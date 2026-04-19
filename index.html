@@ -2,11 +2,30 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Обратный отсчет до 29 мая 2026</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Приглашение на юбилей</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
       :root {
-        color-scheme: dark;
+        --bg: #FDFDFD;
+        --card: #FDFDFD;
+        --text: #1f1f1f;
+        --muted: #6a6a6a;
+        --accent: #2d2d2d;
+        --accent-hover: #111;
+
+        --space-1: 10px;
+        --space-2: 14px;
+        --space-3: 18px;
+        --space-4: 22px;
+        --space-5: 28px;
+        --space-6: 36px;
+        --space-7: 44px;
+        --space-8: 64px;
       }
 
       * {
@@ -15,129 +34,1024 @@
 
       body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        background: radial-gradient(circle at top, #1f2a44, #0b1020 65%);
-        color: #f4f7ff;
+        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: var(--card);
+        color: var(--text);
+        line-height: 1.45;
       }
 
-      .card {
-        width: min(720px, 92vw);
-        padding: 32px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(6px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+      .page {
+        max-width: 560px;
+        margin: 0 auto;
+        padding: 0;
+        background: var(--card);
+        border-radius: 0;
+      }
+
+      .invite-shell {
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+        overflow: visible;
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #2a3328;
+      }
+
+      .hero__img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .hero__veil {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background-image:
+          linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.72) 0%,
+            rgba(0, 0, 0, 0.45) 22%,
+            rgba(0, 0, 0, 0.12) 44%,
+            transparent 58%
+          ),
+          linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.52) 24%,
+            rgba(0, 0, 0, 0.15) 46%,
+            transparent 62%
+          );
+      }
+
+      .hero__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: max(var(--space-5), env(safe-area-inset-top, 0px)) var(--space-4)
+          max(var(--space-5), env(safe-area-inset-bottom, 0px));
+      }
+
+      .hero__inner {
+        flex: 0 0 auto;
+      }
+
+      .hero__bottom {
+        margin-top: auto;
+        padding-top: var(--space-6);
+      }
+
+      .hero__title {
+        padding-top: 20px;
+        margin: 0;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1.05;
+        color: #fffef8;
+        text-shadow:
+          0 1px 2px rgba(0, 0, 0, 0.65),
+          0 4px 28px rgba(0, 0, 0, 0.45);
+      }
+
+      .hero-lede {
+        margin: 0;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.45;
+        color: rgba(255, 254, 248, 0.96);
+        font-weight: 200;
+        text-shadow:
+          0 1px 2px rgba(0, 0, 0, 0.6),
+          0 3px 22px rgba(0, 0, 0, 0.4);
+      }
+
+      .invite-card {
+        margin-top: 0;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+      }
+
+      .content {
+        padding: var(--space-7) var(--space-4) var(--space-6);
+        background: var(--card);
+        border-radius: 0;
+      }
+
+      .heading {
+        margin: var(--space-2) 0 var(--space-5);
+        text-align: center;
+        font-size: 30px;
+        line-height: 1.02;
+        font-weight: 600;
+      }
+
+      .lead {
+        margin: 0 0 var(--space-5);
+        text-align: left;
+        font-size: 18px;
+        line-height: 1.28;
+        font-weight: 200;
+      }
+
+      .big-date {
+        margin: var(--space-8) 0;
+        text-align: center;
+        font-size: 60px;
+        line-height: 1.05;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      .big-date__inner {
+        display: inline-block;
+        padding-bottom: 1.05lh;
+        text-align: left;
+      }
+
+      .big-date__part {
+        display: inline-block;
+      }
+
+      .big-date__part--slash {
+        transform: translateY(0.5lh);
+      }
+
+      .big-date__part--month {
+        transform: translateY(1lh);
+      }
+
+      .event-meta {
+        margin-top: var(--space-4);
+        margin-bottom: var(--space-5);
+        text-align: right;
+        font-size: 18px;
+        line-height: 1.22;
+        font-weight: 200;
+      }
+
+      .venue {
+        margin-top: var(--space-8);
         text-align: center;
       }
 
-      h1 {
-        margin-top: 0;
-        margin-bottom: 8px;
-        font-size: clamp(24px, 4vw, 36px);
-      }
-
-      .subtitle {
-        margin: 0 0 28px;
-        opacity: 0.85;
-      }
-
-      .timer {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .time-box {
-        padding: 16px 10px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .value {
-        font-size: clamp(26px, 4vw, 38px);
+      .venue__label {
+        margin: 0 0 var(--space-2);
+        font-size: 12px;
         font-weight: 700;
+        letter-spacing: 0.14em;
+        color: rgba(31, 31, 31, 0.55);
+      }
+
+      .venue__name {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         line-height: 1.1;
       }
 
-      .label {
-        margin-top: 4px;
-        font-size: 13px;
-        opacity: 0.85;
+      .venue__address {
+        margin: var(--space-2) 0 0;
+        font-size: 18px;
+        font-weight: 200;
+        line-height: 1.3;
+        color: rgba(31, 31, 31, 0.88);
+      }
+
+      .photo-placeholder {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: var(--space-6) auto;
+        border-radius: 4px;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      .dresscode {
+        margin-top: var(--space-3);
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      .dresscode__title {
+        margin: 0 0 var(--space-3);
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+      }
+
+      .dresscode__text {
+        margin: var(--space-3) 0 var(--space-7);
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.25;
+        font-weight: 200;
+      }
+
+      .dresscode__palette {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-top: var(--space-3);
+      }
+
+      .section-divider {
+        margin: var(--space-7) 0;
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+
+      .section-divider::before,
+      .section-divider::after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(to right, rgba(31, 31, 31, 0.08), rgba(31, 31, 31, 0.45));
+      }
+
+      .section-divider::after {
+        background: linear-gradient(to left, rgba(31, 31, 31, 0.08), rgba(31, 31, 31, 0.45));
+      }
+
+      .section-divider__dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #2f2f2f;
+      }
+
+      form {
+        display: grid;
+        gap: var(--space-5);
+        margin-top: var(--space-5);
+      }
+
+      .form-title {
+        margin: 0 0 var(--space-4);
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+      }
+
+      .form-section {
+        display: grid;
+        gap: var(--space-4);
+      }
+
+      .form-section + .form-section {
+        margin-top: var(--space-3);
+      }
+
+      .form-section__title {
+        margin: 0 0 var(--space-2);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        color: rgba(31, 31, 31, 0.45);
       }
 
-      .done {
-        font-size: clamp(22px, 3vw, 30px);
+      .form-field {
+        display: grid;
+        gap: var(--space-2);
+      }
+
+      .form-field + .form-field {
+        margin-top: var(--space-4);
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: rgba(31, 31, 31, 0.82);
+      }
+
+      input {
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        font-size: clamp(16px, 3.8vw, 17px);
+        line-height: 1.45;
+        font-weight: inherit;
+        height: 46px;
+        padding: 0 2px;
+        background: transparent;
+        color: var(--text);
+        border-bottom: 1px solid rgba(31, 31, 31, 0.18);
+        transition: border-color 0.15s ease, background-color 0.15s ease;
+      }
+
+      input::placeholder {
+        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        font-size: inherit;
+        line-height: inherit;
+        font-weight: inherit;
+        letter-spacing: inherit;
+        color: rgba(31, 31, 31, 0.42);
+        opacity: 1;
+      }
+
+      input:focus {
+        outline: none;
+        border-bottom-color: rgba(90, 31, 43, 0.55);
+        background: var(--card);
+      }
+
+      input:focus-visible {
+        outline: none;
+        box-shadow: none;
+      }
+
+      input[type="number"] {
+        appearance: textfield;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .drink-list {
+        display: grid;
+        gap: 0;
+        border-top: 1px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .drink-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-4);
+        align-items: center;
+        padding: var(--space-4) 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        border-bottom: 1px solid rgba(31, 31, 31, 0.08);
+      }
+
+      .drink-row:last-child {
+        border-bottom: 0;
+      }
+
+      .drink-name {
+        font-size: clamp(16px, 4vw, 18px);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1.25;
+      }
+
+      .qty {
+        display: grid;
+        grid-template-columns: 44px 40px 44px;
+        gap: var(--space-2);
+        align-items: center;
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+      }
+
+      .qty__btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        border: 0;
+        background: rgba(31, 31, 31, 0.06);
+        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        transition: transform 0.12s ease, background-color 0.12s ease;
+      }
+
+      .qty__btn:hover:not(:disabled) {
+        transform: translateY(-1px);
+        background: rgba(31, 31, 31, 0.1);
+      }
+
+      .qty__btn:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      .qty__btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      .qty__btn:focus,
+      .qty__btn:focus-visible {
+        outline: none;
+      }
+
+      .qty__value {
+        text-align: center;
+        font-size: 17px;
+        font-weight: 800;
+        color: rgba(31, 31, 31, 0.86);
+      }
+
+      .hint {
+        margin: var(--space-4) 0 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.35;
+        text-align: center;
+      }
+
+      .submit-btn {
+        border: 0;
+        background: linear-gradient(135deg, #5a1f2b 0%, #2f2f2f 100%);
+        color: #fff;
+        font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         font-weight: 700;
+        height: 54px;
+        border-radius: 16px;
+        font-size: 16px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        box-shadow: 0 14px 28px rgba(90, 31, 43, 0.22);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        cursor: pointer;
+        margin-top: var(--space-2);
       }
 
-      @media (max-width: 560px) {
-        .timer {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+      .submit-btn:hover {
+        filter: brightness(1.03);
+        transform: translateY(-1px);
+        box-shadow: 0 18px 34px rgba(90, 31, 43, 0.26);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 12px 22px rgba(90, 31, 43, 0.2);
+      }
+
+      .submit-btn:focus,
+      .submit-btn:focus-visible {
+        outline: none;
+      }
+
+      .status {
+        min-height: 20px;
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .status.error {
+        color: #b42318;
+      }
+
+      .status.success {
+        color: #027a48;
+      }
+
+      @media (max-width: 420px) {
+        .content {
+          padding: var(--space-6) var(--space-4) var(--space-5);
+        }
+
+        .venue {
+          margin-top: var(--space-7);
+        }
+
+        .section-divider {
+          margin: var(--space-7) 0;
+        }
+
+        .drink-row {
+          grid-template-columns: 1fr;
+          gap: var(--space-3);
+        }
+
+        .qty {
+          width: 100%;
+          justify-self: stretch;
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .qty__btn {
+          width: 100%;
         }
       }
     </style>
   </head>
   <body>
-    <main class="card">
-      <h1>Считаем до 29 мая 2026</h1>
-      <p class="subtitle">Пока стартуем с простого экрана с таймером.</p>
-
-      <section id="timer" class="timer" aria-live="polite">
-        <div class="time-box">
-          <div class="value" id="days">0</div>
-          <div class="label">дней</div>
-        </div>
-        <div class="time-box">
-          <div class="value" id="hours">0</div>
-          <div class="label">часов</div>
-        </div>
-        <div class="time-box">
-          <div class="value" id="minutes">0</div>
-          <div class="label">минут</div>
-        </div>
-        <div class="time-box">
-          <div class="value" id="seconds">0</div>
-          <div class="label">секунд</div>
+    <main class="page">
+      <div class="invite-shell">
+      <section class="hero" aria-label="Обложка приглашения">
+        <img
+          class="hero__img"
+          src="images/hero-garden.png"
+          width="927"
+          height="1024"
+          alt="Оформление праздника — цветы"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div class="hero__veil" aria-hidden="true"></div>
+        <div class="hero__overlay">
+          <div class="hero__inner">
+            <h1 class="hero__title">ПРИГЛАШЕНИЕ НА ЮБИЛЕЙ НАТАЛЬИ</h1>
+          </div>
+          <div class="hero__bottom">
+            <p class="hero-lede">
+              Каждую весну всё возвращается к жизни - свет, тепло, голоса, близкие
+              люди. В этот день мы открываем сад, чтобы вместе отпраздновать
+              юбилей Натальи — женщины, вокруг которой всегда начинается весна.
+            </p>
+          </div>
         </div>
       </section>
+
+      <section class="invite-card">
+        <div class="content">
+          <p class="heading">ДОРОГИЕ ГОСТИ!</p>
+          <p class="lead">
+            Мы хотим собрать вас в одном месте, чтобы вместе прожить этот день —
+            светлый, живой, наполненный смехом, воспоминаниями и новыми
+            историями.
+          </p>
+
+          <p class="big-date" aria-label="30 / 05">
+            <span class="big-date__inner"
+              ><span class="big-date__part big-date__part--day">30</span
+              ><span class="big-date__part big-date__part--slash">/</span
+              ><span class="big-date__part big-date__part--month">05</span
+            ></span>
+          </p>
+
+          <p class="event-meta">
+            Будем рады <br />
+            видеть вас рядом <br />
+            30 мая 2026 в 18:00
+          </p>
+
+          <div class="venue">
+            <p class="venue__label">МЕСТО ПРОВЕДЕНИЯ</p>
+            <p class="venue__name">КАФЕ КАПРИЗ</p>
+            <p class="venue__address">город Бирск, Интернациональная 22А.</p>
+          </div>
+
+          <img
+            class="photo-placeholder"
+            src="images/venue.png"
+            alt="Кафе Каприз — атмосфера зала"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <div class="section-divider" aria-hidden="true">
+            <span class="section-divider__dot"></span>
+          </div>
+
+          <section class="dresscode" aria-label="Дресс-код">
+            <p class="dresscode__title">ДРЕСС КОД - ВЕСЕННИЙ САД</p>
+            <p class="dresscode__text">
+              Поддержите атмосферу вечера: оттенки зелени, цветущих ветвей,
+              нежные светлые тона.
+            </p>
+            <img
+              class="dresscode__palette"
+              src="images/dresscode-palette.png"
+              width="1024"
+              height="317"
+              alt="Палитра цветов для дресс-кода"
+              loading="lazy"
+              decoding="async"
+            />
+          </section>
+
+          <div class="section-divider" aria-hidden="true">
+            <span class="section-divider__dot"></span>
+          </div>
+
+          <form id="rsvp-form">
+            <h2 class="form-title">АНКЕТА ГОСТЯ</h2>
+
+            <div class="form-section" aria-label="Данные гостя">
+              <p class="form-section__title">Данные гостя</p>
+
+              <div class="form-field">
+                <label for="guest-name">ФИО</label>
+                <input
+                  id="guest-name"
+                  name="guestName"
+                  type="text"
+                  required
+                  placeholder="Введите"
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="family-count">Количество человек:</label>
+                <input
+                  id="family-count"
+                  name="familyCount"
+                  type="number"
+                  min="1"
+                  max="30"
+                  value="1"
+                  inputmode="numeric"
+                  required
+                  placeholder="Введите"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="form-section" aria-label="Напитки">
+              <p class="form-section__title">Напитки</p>
+              <div id="drink-list" class="drink-list"></div>
+              <p id="drink-limit-hint" class="hint"></p>
+            </div>
+
+            <button class="submit-btn" type="submit">Отправить</button>
+            <p id="status" class="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+      </div>
     </main>
 
     <script>
-      const deadline = new Date("2026-05-29T00:00:00");
-      const timerElement = document.getElementById("timer");
+      const WEBHOOK_URL =
+        "https://script.google.com/macros/s/AKfycbwR8WvVcWg3Lcm-YaILnv7QFOhoKo97JcRpCV5ReMwZnYh_yUlUOuHdB5fRVL9VMJGTjw/exec";
 
-      function pad(value) {
-        return String(value).padStart(2, "0");
+      const DRINKS = [
+        "Красное вино",
+        "Белое вино",
+        "Игристое/шампанское",
+        "Водка",
+        "Коньяк",
+        "Не пью алкоголь"
+      ];
+
+      const form = document.getElementById("rsvp-form");
+      const guestNameInput = document.getElementById("guest-name");
+      const familyCountInput = document.getElementById("family-count");
+      const drinkList = document.getElementById("drink-list");
+      const statusText = document.getElementById("status");
+      const drinkLimitHint = document.getElementById("drink-limit-hint");
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      const counts = new Map();
+
+      function getFamilyCount() {
+        const parsed = Number(familyCountInput.value);
+        return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 1;
       }
 
-      function updateTimer() {
-        const now = new Date();
-        const diff = deadline.getTime() - now.getTime();
+      function sanitizeFamilyCountInput() {
+        let v = familyCountInput.value.replace(/\D/g, "");
+        if (v === "") {
+          familyCountInput.value = "";
+          return;
+        }
+        let n = parseInt(v, 10);
+        if (!Number.isFinite(n)) {
+          familyCountInput.value = "";
+          return;
+        }
+        if (n > 30) {
+          familyCountInput.value = "30";
+          return;
+        }
+        if (n == 0) {
+          familyCountInput.value = "1";
+          return;
+        }
+        familyCountInput.value = String(n);
+      }
 
-        if (diff <= 0) {
-          timerElement.innerHTML = '<p class="done">Дата наступила 🎉</p>';
+      function totalDrinks() {
+        let sum = 0;
+        counts.forEach((value) => {
+          sum += value;
+        });
+        return sum;
+      }
+
+      function syncDrinkLimit() {
+        const familyCount = getFamilyCount();
+        const total = totalDrinks();
+
+        drinkLimitHint.textContent =
+          "Напитков выбрано: " +
+          total +
+          " из " +
+          familyCount +
+          ". Сумма порций не может превышать количество гостей.";
+
+        drinkList.querySelectorAll(".qty__btn--plus").forEach((button) => {
+          button.disabled = total >= familyCount;
+        });
+      }
+
+      function setCount(name, next) {
+        const familyCount = getFamilyCount();
+        const otherTotal = totalDrinks() - (counts.get(name) || 0);
+        const maxForThis = Math.max(0, familyCount - otherTotal);
+        const value = Math.max(0, Math.min(next, maxForThis));
+        counts.set(name, value);
+
+        const valueNode = drinkList.querySelector('[data-qty-for="' + name + '"]');
+        if (valueNode) {
+          valueNode.textContent = String(value);
+        }
+
+        syncDrinkLimit();
+      }
+
+      function buildDrinkRows() {
+        drinkList.innerHTML = "";
+        DRINKS.forEach((name) => {
+          counts.set(name, 0);
+
+          const row = document.createElement("div");
+          row.className = "drink-row";
+
+          const title = document.createElement("div");
+          title.className = "drink-name";
+          title.textContent = name;
+
+          const qty = document.createElement("div");
+          qty.className = "qty";
+
+          const minus = document.createElement("button");
+          minus.type = "button";
+          minus.className = "qty__btn";
+          minus.textContent = "−";
+          minus.addEventListener("click", () => {
+            setCount(name, (counts.get(name) || 0) - 1);
+          });
+
+          const value = document.createElement("div");
+          value.className = "qty__value";
+          value.setAttribute("data-qty-for", name);
+          value.textContent = "0";
+
+          const plus = document.createElement("button");
+          plus.type = "button";
+          plus.className = "qty__btn qty__btn--plus";
+          plus.textContent = "+";
+          plus.addEventListener("click", () => {
+            setCount(name, (counts.get(name) || 0) + 1);
+          });
+
+          qty.appendChild(minus);
+          qty.appendChild(value);
+          qty.appendChild(plus);
+
+          row.appendChild(title);
+          row.appendChild(qty);
+          drinkList.appendChild(row);
+        });
+
+        syncDrinkLimit();
+      }
+
+      familyCountInput.addEventListener("keydown", (e) => {
+        if (e.ctrlKey || e.metaKey || e.altKey) {
+          return;
+        }
+        const allow = [
+          "Backspace",
+          "Delete",
+          "Tab",
+          "Escape",
+          "Enter",
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowUp",
+          "ArrowDown",
+          "Home",
+          "End"
+        ];
+        if (allow.includes(e.key)) {
+          return;
+        }
+        if (e.key.length === 1 && /^\d$/.test(e.key)) {
+          return;
+        }
+        e.preventDefault();
+      });
+
+      familyCountInput.addEventListener("input", () => {
+        sanitizeFamilyCountInput();
+        const familyCount = getFamilyCount();
+        if (totalDrinks() > familyCount) {
+          const overflow = totalDrinks() - familyCount;
+          for (let i = 0; i < overflow; i += 1) {
+            for (const name of [...DRINKS].reverse()) {
+              if ((counts.get(name) || 0) > 0) {
+                setCount(name, (counts.get(name) || 0) - 1);
+                break;
+              }
+            }
+          }
+        }
+        syncDrinkLimit();
+      });
+
+      function responseLooksLikeHtml(text) {
+        const trimmed = text.trim();
+        return (
+          trimmed.startsWith("<!") ||
+          trimmed.toLowerCase().startsWith("<html")
+        );
+      }
+
+      function interpretSendError(error) {
+        const msg = String(error && error.message ? error.message : error);
+        if (/failed to fetch|load failed|networkerror/i.test(msg)) {
+          return (
+            "Нет связи с сервером (блокировщик рекламы, режим инкогнито, сеть). " +
+            "Откройте сайт по https (не из файла на диске) или временно отключите блокировщики."
+          );
+        }
+        return msg;
+      }
+
+      async function sendPayload(payload) {
+        if (!WEBHOOK_URL) {
+          const stored = JSON.parse(localStorage.getItem("rsvpDrafts") || "[]");
+          stored.push(payload);
+          localStorage.setItem("rsvpDrafts", JSON.stringify(stored));
+          return {
+            ok: true,
+            message:
+              "Анкета сохранена локально. Добавьте URL Google Apps Script в WEBHOOK_URL."
+          };
+        }
+
+        const isGoogleScript = WEBHOOK_URL.includes("script.google.com");
+        const fetchOpts = {
+          method: "POST",
+          mode: "cors",
+          credentials: "omit",
+          cache: "no-store"
+        };
+
+        let response;
+        let text;
+
+        if (isGoogleScript) {
+          const payloadStr = JSON.stringify(payload);
+
+          const formBody = new FormData();
+          formBody.append("payload", payloadStr);
+
+          response = await fetch(WEBHOOK_URL, { ...fetchOpts, body: formBody });
+          text = await response.text();
+
+          if (!response.ok || responseLooksLikeHtml(text)) {
+            response = await fetch(WEBHOOK_URL, {
+              ...fetchOpts,
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+              },
+              body: "payload=" + encodeURIComponent(payloadStr)
+            });
+            text = await response.text();
+          }
+        } else {
+          response = await fetch(WEBHOOK_URL, {
+            ...fetchOpts,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          text = await response.text();
+        }
+
+        let parsed = null;
+        try {
+          parsed = JSON.parse(text);
+        } catch {
+          parsed = null;
+        }
+
+        if (!response.ok) {
+          throw new Error(
+            "Ошибка отправки. Код: " +
+              response.status +
+              (parsed && parsed.error ? ". " + parsed.error : "")
+          );
+        }
+
+        if (responseLooksLikeHtml(text)) {
+          throw new Error(
+            "Сервер вернул страницу вместо ответа скрипта. Проверьте URL веб-приложения (Deploy) в Google Apps Script."
+          );
+        }
+
+        if (parsed && parsed.ok === false) {
+          throw new Error(parsed.error || "Скрипт вернул ошибку.");
+        }
+
+        return { ok: true, message: "Спасибо, анкета отправлена." };
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        statusText.className = "status";
+        statusText.textContent = "Отправляем...";
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
+
+        const familyCount = getFamilyCount();
+        const drinkLines = [];
+
+        counts.forEach((qty, name) => {
+          if (qty > 0) {
+            drinkLines.push(name + " x" + qty);
+          }
+        });
+
+        const payload = {
+          guestName: (guestNameInput && guestNameInput.value
+            ? guestNameInput.value
+            : ""
+          ).trim(),
+          familyCount,
+          drinks: drinkLines,
+          sentAt: new Date().toISOString()
+        };
+
+        if (!payload.guestName) {
+          statusText.className = "status error";
+          statusText.textContent = "Укажите ФИО.";
+          if (submitBtn) {
+            submitBtn.disabled = false;
+          }
           return;
         }
 
-        const totalSeconds = Math.floor(diff / 1000);
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+        if (totalDrinks() === 0) {
+          statusText.className = "status error";
+          statusText.textContent = "Выберите хотя бы один напиток.";
+          if (submitBtn) {
+            submitBtn.disabled = false;
+          }
+          return;
+        }
 
-        document.getElementById("days").textContent = String(days);
-        document.getElementById("hours").textContent = pad(hours);
-        document.getElementById("minutes").textContent = pad(minutes);
-        document.getElementById("seconds").textContent = pad(seconds);
-      }
+        if (totalDrinks() > familyCount) {
+          statusText.className = "status error";
+          statusText.textContent =
+            "Сумма напитков больше количества гостей. Уменьшите порции.";
+          if (submitBtn) {
+            submitBtn.disabled = false;
+          }
+          return;
+        }
 
-      updateTimer();
-      setInterval(updateTimer, 1000);
+        try {
+          const result = await sendPayload(payload);
+          statusText.className = "status success";
+          statusText.textContent = result.message;
+          form.reset();
+          buildDrinkRows();
+        } catch (error) {
+          statusText.className = "status error";
+          statusText.textContent = interpretSendError(error);
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+          }
+        }
+      });
+
+      buildDrinkRows();
     </script>
   </body>
 </html>
