@@ -207,6 +207,10 @@
         font-weight: 200;
       }
 
+      .event-meta strong {
+        font-weight: 700;
+      }
+
       .venue {
         margin-top: var(--space-8);
         text-align: center;
@@ -328,12 +332,11 @@
       }
 
       .form-section__title {
-        margin: 0 0 var(--space-2);
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: rgba(31, 31, 31, 0.45);
+        margin: 0;
+        display: block;
+        font-weight: 700;
+        font-size: 16px;
+        color: rgba(31, 31, 31, 0.9);
       }
 
       .form-field {
@@ -347,10 +350,10 @@
 
       label {
         display: block;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 0;
         font-size: 16px;
-        color: rgba(31, 31, 31, 0.82);
+        color: rgba(31, 31, 31, 0.9);
       }
 
       input {
@@ -403,7 +406,6 @@
       .drink-list {
         display: grid;
         gap: 0;
-        border-top: 1px solid rgba(31, 31, 31, 0.08);
       }
 
       .drink-row {
@@ -425,9 +427,10 @@
 
       .drink-name {
         font-size: clamp(16px, 4vw, 18px);
-        font-weight: 600;
+        font-weight: 500;
         letter-spacing: 0.01em;
         line-height: 1.25;
+        color: rgba(31, 31, 31, 0.78);
       }
 
       .qty {
@@ -613,7 +616,7 @@
           <p class="event-meta">
             Будем рады <br />
             видеть вас рядом <br />
-            30 мая 2026 в 18:00
+            <strong>30 мая 2026 в 16:00</strong>
           </p>
 
           <div class="venue">
@@ -659,8 +662,6 @@
             <h2 class="form-title">АНКЕТА ГОСТЯ</h2>
 
             <div class="form-section" aria-label="Данные гостя">
-              <p class="form-section__title">Данные гостя</p>
-
               <div class="form-field">
                 <label for="guest-name">ФИО</label>
                 <input
@@ -668,7 +669,7 @@
                   name="guestName"
                   type="text"
                   required
-                  placeholder="Введите"
+                  placeholder="Введите ФИО"
                   autocomplete="name"
                 />
               </div>
@@ -681,10 +682,9 @@
                   type="number"
                   min="1"
                   max="30"
-                  value="1"
                   inputmode="numeric"
                   required
-                  placeholder="Введите"
+                  placeholder="Введите количество человек"
                   autocomplete="off"
                 />
               </div>
@@ -765,13 +765,20 @@
       function syncDrinkLimit() {
         const familyCount = getFamilyCount();
         const total = totalDrinks();
+        const hasGuestCount = familyCountInput.value.trim() !== "";
 
-        drinkLimitHint.textContent =
-          "Напитков выбрано: " +
-          total +
-          " из " +
-          familyCount +
-          ". Сумма порций не может превышать количество гостей.";
+        if (!hasGuestCount) {
+          drinkLimitHint.textContent = "";
+          drinkLimitHint.style.display = "none";
+        } else {
+          drinkLimitHint.style.display = "";
+          drinkLimitHint.textContent =
+            "Напитков выбрано: " +
+            total +
+            " из " +
+            familyCount +
+            ". Сумма порций не может превышать количество гостей.";
+        }
 
         drinkList.querySelectorAll(".qty__btn--plus").forEach((button) => {
           button.disabled = total >= familyCount;
