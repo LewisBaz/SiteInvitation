@@ -781,7 +781,7 @@
         }
 
         drinkList.querySelectorAll(".qty__btn--plus").forEach((button) => {
-          button.disabled = total >= familyCount;
+          button.disabled = !hasGuestCount || total >= familyCount;
         });
       }
 
@@ -876,6 +876,21 @@
 
       familyCountInput.addEventListener("input", () => {
         sanitizeFamilyCountInput();
+        const hasGuestCount = familyCountInput.value.trim() !== "";
+        if (!hasGuestCount) {
+          DRINKS.forEach((name) => {
+            counts.set(name, 0);
+            const valueNode = drinkList.querySelector(
+              '[data-qty-for="' + name + '"]'
+            );
+            if (valueNode) {
+              valueNode.textContent = "0";
+            }
+          });
+          syncDrinkLimit();
+          return;
+        }
+
         const familyCount = getFamilyCount();
         if (totalDrinks() > familyCount) {
           const overflow = totalDrinks() - familyCount;
